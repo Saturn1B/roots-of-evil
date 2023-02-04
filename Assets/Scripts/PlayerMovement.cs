@@ -7,7 +7,8 @@ public class PlayerMovement : MonoBehaviour
     enum WalkState
     {
         NORMAL,
-        CAPTURE
+        CAPTURE,
+        SACRIFICE
     }
 
     [SerializeField] Rigidbody rb;
@@ -23,11 +24,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GameObject animalInRange = null;
     [SerializeField] Transform capturedPoints;
 
+    bool canSacrifice;
+    [SerializeField] ParticleSystem blood01;
+    [SerializeField] ParticleSystem blood02;
+
     private void Update()
     {
         GatherInput();
         Look();
         Capture();
+        Sacrifice();
     }
 
     private void FixedUpdate()
@@ -39,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
                 break;
             case WalkState.CAPTURE:
                 MoveCapture();
+                break;
+            case WalkState.SACRIFICE:
                 break;
             default:
                 break;
@@ -81,6 +89,34 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("isRunning", false);
             animator.SetBool("isCapturing", true);
         }
+    }
+
+    void Sacrifice()
+    {
+        if(Input.GetKeyDown(KeyCode.E) && captured && canSacrifice)
+        {
+            StartCoroutine(SacrificePath());
+        }
+    }
+
+    IEnumerator SacrificePath()
+    {
+        walkState = WalkState.SACRIFICE;
+
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isRunning", false);
+        animator.SetBool("isCapturing", false);
+
+        blood01.Play();
+        blood02.Play();
+
+        Destroy(animalInRange);
+        animalInRange.SetActive(false);
+        captured = false;
+
+        yield return new WaitForSeconds(1);
+
+        walkState = WalkState.NORMAL;
     }
 
     void MoveNormal()
@@ -129,6 +165,10 @@ public class PlayerMovement : MonoBehaviour
         {
             animalInRange = other.gameObject;
         }
+        else if (other.CompareTag("Altar"))
+        {
+            canSacrifice = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -136,6 +176,11 @@ public class PlayerMovement : MonoBehaviour
         if(other.gameObject == animalInRange)
         {
             animalInRange = null;
+        }
+
+        if (other.CompareTag("Altar"))
+        {
+            canSacrifice = false;
         }
     }
 }
