@@ -30,6 +30,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Slider escapePercentSlider;
     [SerializeField] GameObject canvas;
 
+    bool firstSacrifice;
+    [SerializeField] GameObject sacrificeText;
+
+    bool firstBlock;
+    [SerializeField] GameObject blockText;
+
+    bool firstCapture;
+    [SerializeField] GameObject captureText;
+
     private void Update()
     {
         GatherInput();
@@ -84,6 +93,9 @@ public class PlayerMovement : MonoBehaviour
             //TO DO Capture
             captured = true;
             canvas.SetActive(true);
+            captureText.SetActive(false);
+            if(!firstCapture)
+                firstCapture = true;
 
             animalInRange.GetComponent<Animals>().Capture();
             animalInRange.transform.SetParent(transform);
@@ -93,6 +105,12 @@ public class PlayerMovement : MonoBehaviour
             walkState = WalkState.CAPTURE;
             animator.SetBool("isRunning", false);
             animator.SetBool("isCapturing", true);
+
+            if (!firstBlock)
+            {
+                blockText.SetActive(true);
+                firstBlock = true;
+            }
         }
     }
 
@@ -106,6 +124,8 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator SacrificePath()
     {
+        sacrificeText.SetActive(false);
+
         walkState = WalkState.SACRIFICE;
 
         animator.SetBool("isWalking", false);
@@ -175,6 +195,8 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
+                blockText.SetActive(false);
+
                 animalInRange.GetComponent<Animals>().Block();
             }
         }
@@ -190,6 +212,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void LooseAnimal()
     {
+        blockText.SetActive(false);
         canvas.SetActive(false);
         animator.SetBool("isCapturing", false);
         captured = false;
@@ -202,10 +225,21 @@ public class PlayerMovement : MonoBehaviour
         if(other.GetComponent<Animals>() != null && !captured)
         {
             animalInRange = other.gameObject;
+            if(!firstCapture)
+            {
+                captureText.SetActive(true);
+            }
         }
         else if (other.CompareTag("Altar"))
         {
             canSacrifice = true;
+
+            if (captured && !firstSacrifice)
+            {
+                blockText.SetActive(false);
+                sacrificeText.SetActive(true);
+                firstSacrifice = true;
+            }
         }
     }
 
@@ -214,6 +248,7 @@ public class PlayerMovement : MonoBehaviour
         if(other.gameObject == animalInRange)
         {
             animalInRange = null;
+            captureText.SetActive(false);
         }
 
         if (other.CompareTag("Altar"))
