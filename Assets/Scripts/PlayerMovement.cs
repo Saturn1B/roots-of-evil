@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    enum WalkState
+    {
+        NORMAL,
+        CAPTURE
+    }
+
     [SerializeField] Rigidbody rb;
     [SerializeField] float speed = 5;
     [SerializeField] float turnSpeed = 360;
@@ -11,15 +17,32 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] Animator animator;
 
+    WalkState walkState = WalkState.NORMAL;
+
+    bool captured;
+    [SerializeField] GameObject animalInRange = null;
+    [SerializeField] Transform capturedPoints;
+
     private void Update()
     {
         GatherInput();
         Look();
+        Capture();
     }
 
     private void FixedUpdate()
     {
-        Move();
+        switch (walkState)
+        {
+            case WalkState.NORMAL:
+                MoveNormal();
+                break;
+            case WalkState.CAPTURE:
+                MoveCapture();
+                break;
+            default:
+                break;
+        }
     }
 
     void GatherInput()
@@ -42,7 +65,25 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Move()
+    void Capture()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && animalInRange != null && !captured)
+        {
+            //TO DO Capture
+            captured = true;
+
+            animalInRange.GetComponent<Animals>().Capture();
+            animalInRange.transform.SetParent(transform);
+            animalInRange.transform.position = capturedPoints.position;
+            animalInRange.transform.eulerAngles = capturedPoints.eulerAngles;
+
+            walkState = WalkState.CAPTURE;
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isCapturing", true);
+        }
+    }
+
+    void MoveNormal()
     {
         if (input.magnitude > 0)
         {
@@ -65,6 +106,36 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("isWalking", false);
             animator.SetBool("isRunning", false);
             speed = 5;
+        }
+    }
+
+    void MoveCapture()
+    {
+        if (input.magnitude > 0)
+        {
+            speed = 4;
+            rb.MovePosition(transform.position + /*(*/transform.forward /** input.magnitude)*/ * speed * Time.deltaTime);
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.GetComponent<Animals>() != null && !captured)
+        {
+            animalInRange = other.gameObject;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject == animalInRange)
+        {
+            animalInRange = null;
         }
     }
 }
