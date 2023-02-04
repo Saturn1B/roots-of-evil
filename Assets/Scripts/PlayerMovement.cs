@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -28,12 +29,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] ParticleSystem blood01;
     [SerializeField] ParticleSystem blood02;
 
+    [SerializeField] Slider escapePercentSlider;
+    [SerializeField] GameObject canvas;
+
     private void Update()
     {
         GatherInput();
         Look();
         Capture();
         Sacrifice();
+        Block();
+        UpdateSlider();
     }
 
     private void FixedUpdate()
@@ -79,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //TO DO Capture
             captured = true;
+            canvas.SetActive(true);
 
             animalInRange.GetComponent<Animals>().Capture();
             animalInRange.transform.SetParent(transform);
@@ -113,6 +120,8 @@ public class PlayerMovement : MonoBehaviour
         Destroy(animalInRange);
         animalInRange.SetActive(false);
         captured = false;
+
+        canvas.SetActive(false);
 
         yield return new WaitForSeconds(1);
 
@@ -149,14 +158,46 @@ public class PlayerMovement : MonoBehaviour
     {
         if (input.magnitude > 0)
         {
-            speed = 4;
+            speed = 3;
             rb.MovePosition(transform.position + /*(*/transform.forward /** input.magnitude)*/ * speed * Time.deltaTime);
             animator.SetBool("isWalking", true);
         }
         else
         {
             animator.SetBool("isWalking", false);
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                animalInRange.GetComponent<Animals>().Block();
+            }
         }
+    }
+
+    void Block()
+    {
+        if (input.magnitude <= 0 && captured)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                animalInRange.GetComponent<Animals>().Block();
+            }
+        }
+    }
+
+    void UpdateSlider()
+    {
+        if (captured)
+        {
+            escapePercentSlider.value = 1 - (animalInRange.GetComponent<Animals>().escapePercent / 100);
+        }
+    }
+
+    public void LooseAnimal()
+    {
+        canvas.SetActive(false);
+        animator.SetBool("isCapturing", false);
+        captured = false;
+        animalInRange = null;
+        walkState = WalkState.NORMAL;
     }
 
     private void OnTriggerEnter(Collider other)
