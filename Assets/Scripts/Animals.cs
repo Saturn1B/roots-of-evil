@@ -8,6 +8,7 @@ public class Animals : MonoBehaviour
     {
         Idle,
         Wandering,
+        Fleeing,
         Captured
     }
 
@@ -22,6 +23,9 @@ public class Animals : MonoBehaviour
     float shakeTimer = 1.0f;
     public float escapePercent;
 
+    [SerializeField] bool inCorruption;
+    GameObject currentCorruption;
+
     // Update is called once per frame
     void Update()
     {
@@ -33,6 +37,8 @@ public class Animals : MonoBehaviour
                 break;
             case AIStates.Wandering:
                 DoWander();
+                break;
+            case AIStates.Fleeing:
                 break;
             case AIStates.Captured:
                 DoEscape();
@@ -92,8 +98,35 @@ public class Animals : MonoBehaviour
         collider.enabled = true;
         agent.enabled = true;
 
-        agent.SetDestination(RandomNavSphere(transform.position, 20.0f, floorMask));
-        curStates = AIStates.Wandering;
+        if (inCorruption)
+        {
+            bool targetFound = false;
+            Vector3 target = transform.position;
+
+            curStates = AIStates.Fleeing;
+
+            Altar altar = GameObject.FindObjectOfType<Altar>();
+
+
+            while (targetFound == false)
+            {
+                target = UnityEngine.Random.insideUnitSphere * 20;
+                target.y = transform.position.y;
+                targetFound = altar.CheckAnimalTarget(target);
+                Debug.Log("searching ...");
+                Debug.Log(targetFound);
+            }
+
+            Debug.Log(target);
+
+            agent.SetDestination(target);
+            curStates = AIStates.Wandering;
+        }
+        else
+        {
+            agent.SetDestination(RandomNavSphere(transform.position, 20.0f, floorMask));
+            curStates = AIStates.Wandering;
+        }
 
         GameObject.FindObjectOfType<PlayerMovement>().LooseAnimal();
     }
@@ -127,5 +160,44 @@ public class Animals : MonoBehaviour
         }
 
         escapePercent -= 3.5f;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Corruption"))
+        {
+            inCorruption = true;
+            currentCorruption = other.gameObject;
+            if(curStates != AIStates.Captured)
+            {
+                bool targetFound = false;
+                Vector3 target = transform.position;
+
+                curStates = AIStates.Fleeing;
+
+                Altar altar = GameObject.FindObjectOfType<Altar>();
+                while (!targetFound)
+                {
+                    target = UnityEngine.Random.insideUnitSphere * 20;
+                    target.y = transform.position.y;
+                    targetFound = altar.CheckAnimalTarget(target);
+                    Debug.Log("searching ...");
+                    Debug.Log(targetFound);
+                }
+
+                Debug.Log(target);
+
+                agent.SetDestination(target);
+                curStates = AIStates.Wandering;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Corruption") && other.gameObject == currentCorruption)
+        {
+            inCorruption = false;
+        }
     }
 }

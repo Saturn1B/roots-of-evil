@@ -26,8 +26,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform capturedPoints;
 
     bool canSacrifice;
-    [SerializeField] ParticleSystem blood01;
-    [SerializeField] ParticleSystem blood02;
 
     [SerializeField] Slider escapePercentSlider;
     [SerializeField] GameObject canvas;
@@ -114,8 +112,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("isRunning", false);
         animator.SetBool("isCapturing", false);
 
-        blood01.Play();
-        blood02.Play();
+        FindObjectOfType<Altar>().Corrupt();
 
         Destroy(animalInRange);
         animalInRange.SetActive(false);
@@ -123,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
 
         canvas.SetActive(false);
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(.5f);
 
         walkState = WalkState.NORMAL;
     }
