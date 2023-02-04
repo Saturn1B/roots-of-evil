@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
 using DG.Tweening;
-using UnityEngine.UI;
 
 public class Animals : MonoBehaviour
 {
