@@ -10,6 +10,10 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Button play, options, quit;
     [SerializeField] GameObject menuPanel, optionPanel, controlPanel;
     [SerializeField] Slider soundSlider, musicSlider;
+    [SerializeField] GameObject dialog, dial01, dial02, dial03;
+    [SerializeField] GameObject passText;
+
+    int textNum;
 
     [SerializeField] AudioClip music;
 
@@ -22,12 +26,14 @@ public class MenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Pass();
     }
 
     public void Play()
     {
-        SceneManager.LoadScene("Jolie");
+        dialog.SetActive(true);
+        menuPanel.SetActive(false);
+        dial01.SetActive(true);
     }
 
     public void Options()
@@ -68,4 +74,30 @@ public class MenuManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void Pass()
+    {
+        if(Input.GetKeyDown(KeyCode.E) && passText.activeSelf)
+        {
+            if(textNum == 0)
+            {
+                dial01.SetActive(false);
+                dial02.SetActive(true);
+                passText.SetActive(false);
+            }
+            else if(textNum == 1)
+            {
+                dial02.SetActive(false);
+                dial03.SetActive(true);
+                passText.SetActive(false);
+            }
+            else if(textNum == 2)
+            {
+                SceneManager.LoadScene("Jolie");
+            }
+
+            textNum++;
+        }
+    }
+
 }
