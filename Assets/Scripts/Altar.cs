@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class Altar : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Altar : MonoBehaviour
 
     [SerializeField] ParticleSystem blood01;
     [SerializeField] ParticleSystem blood02;
+    [SerializeField] ParticleSystem beaconEffect;
 
     int sacrificeCount;
     [SerializeField] int maxSacrifice = 10;
@@ -21,16 +23,21 @@ public class Altar : MonoBehaviour
     [SerializeField] AudioClip beacon;
     [SerializeField] AudioClip music;
 
+    [SerializeField] GameObject endDialog;
+    public bool end;
+
     // Start is called before the first frame update
     void Start()
     {
         SoundManager.Instance.PlayMusic(music);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        BackToMenu();
     }
 
     public void Corrupt()
@@ -81,6 +88,23 @@ public class Altar : MonoBehaviour
         {
             pillars[4].material = pillarOnMat;
             SoundManager.Instance.Play(beacon);
+            beaconEffect.Play();
+            endDialog.SetActive(true);
+            StartCoroutine(End());
+        }
+    }
+
+    IEnumerator End()
+    {
+        yield return new WaitForSeconds(5.1f);
+        end = true;
+    }
+
+    void BackToMenu()
+    {
+        if (end && Input.GetKeyDown(KeyCode.E))
+        {
+            SceneManager.LoadScene("Menu");
         }
     }
 

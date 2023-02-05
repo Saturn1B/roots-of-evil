@@ -21,6 +21,8 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         SoundManager.Instance.PlayMusic(music);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     // Update is called once per frame
