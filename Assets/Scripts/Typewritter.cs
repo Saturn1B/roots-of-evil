@@ -18,7 +18,7 @@ public class Typewritter : MonoBehaviour
 
     public IEnumerator ShowText()
     {
-        for (int i = 0; i < fullText.Length; i++)
+        for (int i = 0; i < fullText.Length + 1; i++)
         {
             currentText = fullText.Substring(0, i);
             this.GetComponent<TMPro.TMP_Text>().text = currentText;

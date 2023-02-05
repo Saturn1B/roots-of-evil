@@ -8,7 +8,7 @@ public class MenuManager : MonoBehaviour
 {
 
     [SerializeField] Button play, options, quit;
-    [SerializeField] GameObject menuPanel, optionPanel, controlPanel;
+    [SerializeField] GameObject menuPanel, optionPanel, controlPanel, creditsPanel;
     [SerializeField] Slider soundSlider, musicSlider;
     [SerializeField] GameObject dialog, dial01, dial02, dial03;
     [SerializeField] GameObject passText;
@@ -70,6 +70,18 @@ public class MenuManager : MonoBehaviour
     {
         controlPanel.SetActive(false);
         optionPanel.SetActive(true);
+    }
+
+    public void Credits()
+    {
+        menuPanel.SetActive(false);
+        creditsPanel.SetActive(true);
+    }
+
+    public void Back3()
+    {
+        menuPanel.SetActive(true);
+        creditsPanel.SetActive(false);
     }
 
     public void Quit()
