@@ -17,10 +17,14 @@ public class Altar : MonoBehaviour
     int sacrificeCount;
     [SerializeField] int maxSacrifice = 10;
 
+    [SerializeField] AudioClip sacrifice;
+    [SerializeField] AudioClip beacon;
+    [SerializeField] AudioClip music;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        SoundManager.Instance.PlayMusic(music);
     }
 
     // Update is called once per frame
@@ -56,22 +60,27 @@ public class Altar : MonoBehaviour
         if (sacrificeCount == maxSacrifice / 5)
         {
             pillars[0].material = pillarOnMat;
+            SoundManager.Instance.Play(sacrifice);
         }
         else if (sacrificeCount == 2 * (maxSacrifice / 5))
         {
             pillars[1].material = pillarOnMat;
+            SoundManager.Instance.Play(sacrifice);
         }
         else if (sacrificeCount == 3 * (maxSacrifice / 5))
         {
             pillars[2].material = pillarOnMat;
+            SoundManager.Instance.Play(sacrifice);
         }
         else if (sacrificeCount == 4 * (maxSacrifice / 5))
         {
             pillars[3].material = pillarOnMat;
+            SoundManager.Instance.Play(sacrifice);
         }
         else if(sacrificeCount == maxSacrifice)
         {
             pillars[4].material = pillarOnMat;
+            SoundManager.Instance.Play(beacon);
         }
     }
 

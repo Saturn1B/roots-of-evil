@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: db605229635a7e24ebb6edf513663475
+  - enabled: 1
+    path: Assets/Scenes/Jolie.unity
+    guid: 46e4a8c38d3c84a4499e5af58f1eb4cc
   m_configObjects: {}

@@ -142,6 +142,9 @@ MonoBehaviour:
   sacrificeText: {fileID: 0}
   blockText: {fileID: 0}
   captureText: {fileID: 0}
+  sacrifice: {fileID: 8300000, guid: 801ed8f357a53f145a49b361fdbbf82e, type: 3}
+  capture: {fileID: 8300000, guid: aa8c1d0f8e36a2a41904d35075a15675, type: 3}
+  escape: {fileID: 8300000, guid: 40ff0cd5b1cf18d46a3ed5e377d434bb, type: 3}
 --- !u!136 &1875281235986327039
 CapsuleCollider:
   m_ObjectHideFlags: 0

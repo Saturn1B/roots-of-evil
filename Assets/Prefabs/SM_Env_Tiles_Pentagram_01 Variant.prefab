@@ -1003,7 +1003,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 101228, guid: 2f8bac6b7bae5254bbf64855f6613f5e, type: 3}
       propertyPath: m_Name
-      value: SM_Env_Tiles_Pentagram_01
+      value: SM_Env_Tiles_Pentagram_01 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 101228, guid: 2f8bac6b7bae5254bbf64855f6613f5e, type: 3}
       propertyPath: m_TagString
@@ -1114,6 +1114,9 @@ MonoBehaviour:
   blood01: {fileID: 6096045429540628896}
   blood02: {fileID: 6096045430044414642}
   maxSacrifice: 10
+  sacrifice: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
+  beacon: {fileID: 8300000, guid: ff5f85da24bc943d1abdc5760a22bc81, type: 3}
+  music: {fileID: 8300000, guid: fab50212fe8683244a90c53483d4df33, type: 3}
 --- !u!4 &6207736667683202235 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 479558, guid: 2f8bac6b7bae5254bbf64855f6613f5e, type: 3}

@@ -39,6 +39,10 @@ public class PlayerMovement : MonoBehaviour
     bool firstCapture;
     [SerializeField] GameObject captureText;
 
+    [SerializeField] AudioClip sacrifice;
+    [SerializeField] AudioClip capture;
+    [SerializeField] AudioClip escape;
+
     private void Update()
     {
         GatherInput();
@@ -90,7 +94,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && animalInRange != null && !captured)
         {
-            //TO DO Capture
             captured = true;
             canvas.SetActive(true);
             captureText.SetActive(false);
@@ -105,6 +108,8 @@ public class PlayerMovement : MonoBehaviour
             walkState = WalkState.CAPTURE;
             animator.SetBool("isRunning", false);
             animator.SetBool("isCapturing", true);
+
+            SoundManager.Instance.Play(capture);
 
             if (!firstBlock)
             {
@@ -124,6 +129,8 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator SacrificePath()
     {
+        SoundManager.Instance.Play(sacrifice);
+
         sacrificeText.SetActive(false);
 
         walkState = WalkState.SACRIFICE;
@@ -212,6 +219,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void LooseAnimal()
     {
+        SoundManager.Instance.Play(escape);
         blockText.SetActive(false);
         canvas.SetActive(false);
         animator.SetBool("isCapturing", false);
