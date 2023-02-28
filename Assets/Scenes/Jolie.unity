@@ -578,6 +578,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1712012604}
     m_Modifications:
+    - target: {fileID: 2088486091, guid: 7bcb50587964b8145861bae297102564, type: 3}
+      propertyPath: m_Radius
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8625605523941683184, guid: 7bcb50587964b8145861bae297102564, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1007,6 +1011,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Animal03 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3767378194823883916, guid: f69765883f6c1284db81bba55e244d88, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f69765883f6c1284db81bba55e244d88, type: 3}
 --- !u!1001 &250114046
@@ -1430,6 +1438,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Animal04 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3767378194823883916, guid: e84f9f347df6f524a82b2b0acf1525dc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e84f9f347df6f524a82b2b0acf1525dc, type: 3}
 --- !u!1001 &367552798
@@ -1486,6 +1498,10 @@ PrefabInstance:
     - target: {fileID: 3767378194823883916, guid: dd0fefb74a1d5234d80ed7146fd0ff77, type: 3}
       propertyPath: m_Name
       value: Animal02 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767378194823883916, guid: dd0fefb74a1d5234d80ed7146fd0ff77, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd0fefb74a1d5234d80ed7146fd0ff77, type: 3}
@@ -2281,6 +2297,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Animal03
       objectReference: {fileID: 0}
+    - target: {fileID: 3767378194823883916, guid: f69765883f6c1284db81bba55e244d88, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f69765883f6c1284db81bba55e244d88, type: 3}
 --- !u!4 &480376810 stripped
@@ -2914,7 +2934,7 @@ RectTransform:
   m_Father: {fileID: 538111133}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.32077205, y: 0.13235295}
+  m_AnchorMin: {x: 0.32077205, y: 0.19771242}
   m_AnchorMax: {x: 0.67922795, y: 0.24673203}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -2954,7 +2974,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: -Thank you you fool, now this land is mine AH AH AH
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3223,6 +3243,10 @@ PrefabInstance:
     - target: {fileID: 3767378194823883916, guid: f317314955dc90842b742609a7623018, type: 3}
       propertyPath: m_Name
       value: Animal01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767378194823883916, guid: f317314955dc90842b742609a7623018, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f317314955dc90842b742609a7623018, type: 3}
@@ -4160,7 +4184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &765434871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6381,6 +6405,10 @@ PrefabInstance:
     - target: {fileID: 3767378194823883916, guid: dd0fefb74a1d5234d80ed7146fd0ff77, type: 3}
       propertyPath: m_Name
       value: Animal02
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767378194823883916, guid: dd0fefb74a1d5234d80ed7146fd0ff77, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd0fefb74a1d5234d80ed7146fd0ff77, type: 3}
@@ -9919,7 +9947,19 @@ PrefabInstance:
     - target: {fileID: 1812692217, guid: b6e39a87c06253b49841e96065d42560, type: 3}
       propertyPath: corruptionZonesActive.Array.data[1]
       value: 
-      objectReference: {fileID: 110942159}
+      objectReference: {fileID: 1030941608}
+    - target: {fileID: 1812692217, guid: b6e39a87c06253b49841e96065d42560, type: 3}
+      propertyPath: corruptionZonesActive.Array.data[2]
+      value: 
+      objectReference: {fileID: 1329426074}
+    - target: {fileID: 1812692217, guid: b6e39a87c06253b49841e96065d42560, type: 3}
+      propertyPath: corruptionZonesActive.Array.data[3]
+      value: 
+      objectReference: {fileID: 1272551475}
+    - target: {fileID: 1812692217, guid: b6e39a87c06253b49841e96065d42560, type: 3}
+      propertyPath: corruptionZonesActive.Array.data[4]
+      value: 
+      objectReference: {fileID: 743413407}
     - target: {fileID: 6206810461812156986, guid: b6e39a87c06253b49841e96065d42560, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -10586,6 +10626,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Animal02 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3767378194823883916, guid: dd0fefb74a1d5234d80ed7146fd0ff77, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd0fefb74a1d5234d80ed7146fd0ff77, type: 3}
 --- !u!1001 &1838208188
@@ -10642,6 +10686,10 @@ PrefabInstance:
     - target: {fileID: 3767378194823883916, guid: f317314955dc90842b742609a7623018, type: 3}
       propertyPath: m_Name
       value: Animal01
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767378194823883916, guid: f317314955dc90842b742609a7623018, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f317314955dc90842b742609a7623018, type: 3}
@@ -10773,6 +10821,10 @@ PrefabInstance:
     - target: {fileID: 3767378194823883916, guid: e84f9f347df6f524a82b2b0acf1525dc, type: 3}
       propertyPath: m_Name
       value: Animal04 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767378194823883916, guid: e84f9f347df6f524a82b2b0acf1525dc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e84f9f347df6f524a82b2b0acf1525dc, type: 3}
@@ -10942,6 +10994,10 @@ PrefabInstance:
     - target: {fileID: 3767378194823883916, guid: e84f9f347df6f524a82b2b0acf1525dc, type: 3}
       propertyPath: m_Name
       value: Animal04
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767378194823883916, guid: e84f9f347df6f524a82b2b0acf1525dc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e84f9f347df6f524a82b2b0acf1525dc, type: 3}
@@ -11616,6 +11672,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Animal01 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3767378194823883916, guid: f317314955dc90842b742609a7623018, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f317314955dc90842b742609a7623018, type: 3}
 --- !u!1001 &1989068175
@@ -11867,6 +11927,10 @@ PrefabInstance:
     - target: {fileID: 3767378194823883916, guid: f69765883f6c1284db81bba55e244d88, type: 3}
       propertyPath: m_Name
       value: Animal03 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767378194823883916, guid: f69765883f6c1284db81bba55e244d88, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f69765883f6c1284db81bba55e244d88, type: 3}

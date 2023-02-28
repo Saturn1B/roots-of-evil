@@ -43,8 +43,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] AudioClip capture;
     [SerializeField] AudioClip escape;
 
+    Altar altar;
+
+    private void Awake()
+    {
+        altar = FindObjectOfType<Altar>();
+    }
+
     private void Update()
     {
+        if (altar.movementEnd)
+            return;
+
         GatherInput();
         Look();
         Capture();
@@ -55,6 +65,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (altar.movementEnd)
+            return;
+
         switch (walkState)
         {
             case WalkState.NORMAL:

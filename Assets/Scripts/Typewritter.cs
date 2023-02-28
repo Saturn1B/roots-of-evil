@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Typewritter : MonoBehaviour
 {
-    public float delay = .1f;
+    float delay = .075f;
     public string fullText;
     string currentText;
 

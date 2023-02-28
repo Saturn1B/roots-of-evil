@@ -17,14 +17,17 @@ public class Animals : MonoBehaviour
 
     [SerializeField] CapsuleCollider collider;
 
+    [SerializeField] Transform targetTansform;
+
     [HideInInspector] AIStates curStates = AIStates.Idle;
     float waitTimer = 0.0f;
+    public float walkTimer = 20f;
 
     float shakeTimer = 1.0f;
     public float escapePercent;
 
     [SerializeField] bool inCorruption;
-    GameObject currentCorruption;
+    int corruptionZoneCount;
 
     // Update is called once per frame
     void Update()
@@ -39,6 +42,7 @@ public class Animals : MonoBehaviour
                 DoWander();
                 break;
             case AIStates.Fleeing:
+                DoFlee();
                 break;
             case AIStates.Captured:
                 DoEscape();
@@ -62,9 +66,13 @@ public class Animals : MonoBehaviour
 
     void DoWander()
     {
-        if (agent.pathStatus != NavMeshPathStatus.PathComplete)
+        if(agent.pathStatus != NavMeshPathStatus.PathComplete && walkTimer > 0)
+        {
+            walkTimer -= Time.deltaTime;
             return;
+        }
 
+        walkTimer = 20f;
         waitTimer = Random.Range(1.0f, 4.0f);
         curStates = AIStates.Idle;
     }
@@ -89,6 +97,15 @@ public class Animals : MonoBehaviour
         shakeTimer = Random.Range(.5f, 2.0f);
     }
 
+    void DoFlee()
+    {
+        if (inCorruption)
+            return;
+
+        agent.SetDestination(RandomNavSphere(transform.position, 10.0f, floorMask));
+        curStates = AIStates.Wandering;
+    }
+
     void Escape()
     {
         escapePercent = 0;
@@ -110,17 +127,19 @@ public class Animals : MonoBehaviour
 
             while (targetFound == false)
             {
-                target = UnityEngine.Random.insideUnitSphere * 20;
+                target.x = Random.Range(transform.position.x - 10, transform.position.x + 10);
+                target.y = transform.position.y;
+                target.z = Random.Range(transform.position.z - 10, transform.position.z + 10);
                 target.y = transform.position.y;
                 targetFound = altar.CheckAnimalTarget(target);
                 Debug.Log("searching ...");
                 Debug.Log(targetFound);
             }
+            Debug.DrawLine(target, new Vector3(target.x, target.y + 10, target.z), Color.red, 10f, false);
 
             Debug.Log(target);
 
-            agent.SetDestination(target);
-            curStates = AIStates.Wandering;
+            agent.destination = target;
         }
         else
         {
@@ -133,15 +152,29 @@ public class Animals : MonoBehaviour
 
     Vector3 RandomNavSphere(Vector3 origin, float distance, LayerMask layerMask)
     {
-        Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * distance;
+        NavMeshHit navHit;     
 
-        randomDirection += origin;
+        bool targetFound = false;
+        Altar altar = GameObject.FindObjectOfType<Altar>();
 
-        NavMeshHit navHit;
+        Vector3 target = transform.position;
 
-        NavMesh.SamplePosition(randomDirection, out navHit, distance, layerMask);
+        while (!targetFound)
+        {
+            Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * distance;
 
-        return navHit.position;
+            randomDirection += origin;
+
+            NavMesh.SamplePosition(randomDirection, out navHit, distance, layerMask);
+
+            target = navHit.position;
+
+            targetFound = altar.CheckAnimalTarget(target);
+            Debug.Log("searching ...");
+            Debug.Log(targetFound);
+        }
+
+        return target;
     }
 
     public void Capture()
@@ -167,7 +200,7 @@ public class Animals : MonoBehaviour
         if (other.CompareTag("Corruption"))
         {
             inCorruption = true;
-            currentCorruption = other.gameObject;
+            corruptionZoneCount++;
             if(curStates != AIStates.Captured)
             {
                 bool targetFound = false;
@@ -178,26 +211,33 @@ public class Animals : MonoBehaviour
                 Altar altar = GameObject.FindObjectOfType<Altar>();
                 while (!targetFound)
                 {
-                    target = UnityEngine.Random.insideUnitSphere * 20;
+                    //target = Random.insideUnitSphere * 20;
+                    target.x = Random.Range(transform.position.x - 10, transform.position.x + 10);
                     target.y = transform.position.y;
+                    target.z = Random.Range(transform.position.z - 10, transform.position.z + 10);
                     targetFound = altar.CheckAnimalTarget(target);
                     Debug.Log("searching ...");
                     Debug.Log(targetFound);
                 }
+                Debug.DrawLine(target, new Vector3(target.x, target.y + 10, target.z), Color.red, 10f, false);
 
                 Debug.Log(target);
 
-                agent.SetDestination(target);
-                curStates = AIStates.Wandering;
+                agent.destination = target;
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Corruption") && other.gameObject == currentCorruption)
+        if (other.CompareTag("Corruption"))
         {
-            inCorruption = false;
+            corruptionZoneCount--;
+            if(corruptionZoneCount <= 0)
+            {
+                inCorruption = false;
+                corruptionZoneCount = 0;
+            }
         }
     }
 }

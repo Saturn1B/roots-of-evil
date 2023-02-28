@@ -25,6 +25,7 @@ public class Altar : MonoBehaviour
 
     [SerializeField] GameObject endDialog;
     public bool end;
+    public bool movementEnd;
 
     // Start is called before the first frame update
     void Start()
@@ -88,6 +89,7 @@ public class Altar : MonoBehaviour
         {
             pillars[4].material = pillarOnMat;
             SoundManager.Instance.Play(beacon);
+            movementEnd = true;
             beaconEffect.Play();
             endDialog.SetActive(true);
             StartCoroutine(End());
@@ -113,7 +115,7 @@ public class Altar : MonoBehaviour
         foreach(GameObject zone in corruptionZonesActive)
         {
             Debug.Log("try");
-            if (Vector3.Distance(zone.transform.position, target) <= 15)
+            if (Vector3.Distance(zone.transform.position, target) <= zone.transform.localScale.x * zone.GetComponent<SphereCollider>().radius + 2)
             {
                 Debug.Log("inf");
                 return false;

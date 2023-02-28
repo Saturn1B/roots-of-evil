@@ -54,14 +54,4 @@ public class SoundManager : MonoBehaviour
 		EffectsSource.clip = clips[randomIndex];
 		EffectsSource.Play();
 	}
-
-	public void SetSoundLevel(float sliderValue)
-    {
-		EffectsMixer.SetFloat("Sound", Mathf.Log10(sliderValue) * 20);
-    }
-
-	public void SetMusicLevel(float sliderValue)
-    {
-		MusicMixer.SetFloat("Music", Mathf.Log10(sliderValue) * 20);
-    }
 }

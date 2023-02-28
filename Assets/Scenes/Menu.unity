@@ -427,7 +427,7 @@ RectTransform:
   m_Father: {fileID: 1530537129}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.32077205, y: 0.1323529}
+  m_AnchorMin: {x: 0.32077205, y: 0.19771239}
   m_AnchorMax: {x: 0.67922795, y: 0.246732}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -482,7 +482,7 @@ MonoBehaviour:
   m_fontSize: 28
   m_fontSizeBase: 28
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -541,7 +541,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cee2419dc95bc942b15cc360bcc9551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.1
   fullText: -Human!
   passText: {fileID: 40690106}
 --- !u!1 &54366545
@@ -2464,7 +2463,7 @@ RectTransform:
   m_Father: {fileID: 1530537129}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.32077205, y: 0.1323529}
+  m_AnchorMin: {x: 0.32077205, y: 0.19771239}
   m_AnchorMax: {x: 0.67922795, y: 0.246732}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -2578,7 +2577,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cee2419dc95bc942b15cc360bcc9551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.1
   fullText: -You shall sacrifice living creature to my highness ...
   passText: {fileID: 40690106}
 --- !u!1001 &488102393
@@ -3916,8 +3914,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1161008188}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+      - m_Target: {fileID: 1237501880}
+        m_TargetAssemblyTypeName: VolumeSettings, Assembly-CSharp
         m_MethodName: SetMusicLevel
         m_Mode: 0
         m_Arguments:
@@ -5643,6 +5641,7 @@ GameObject:
   - component: {fileID: 1237501877}
   - component: {fileID: 1237501879}
   - component: {fileID: 1237501878}
+  - component: {fileID: 1237501880}
   m_Layer: 5
   m_Name: OptionPanel
   m_TagString: Untagged
@@ -5716,6 +5715,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1237501876}
   m_CullTransparentMesh: 1
+--- !u!114 &1237501880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237501876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 231581f978d8049448a6dd1e0851afc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EffectsMixer: {fileID: 24100000, guid: 89a74e3636e042442984064b7d25164e, type: 2}
+  MusicMixer: {fileID: 24100000, guid: c968cfbc7ee657143857add766d9cfa7, type: 2}
 --- !u!1 &1240257136
 GameObject:
   m_ObjectHideFlags: 0
@@ -6944,8 +6957,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1161008188}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+      - m_Target: {fileID: 1237501880}
+        m_TargetAssemblyTypeName: VolumeSettings, Assembly-CSharp
         m_MethodName: SetSoundLevel
         m_Mode: 0
         m_Arguments:
@@ -8932,7 +8945,7 @@ RectTransform:
   m_Father: {fileID: 1530537129}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.32077205, y: 0.1323529}
+  m_AnchorMin: {x: 0.32077205, y: 0.19771239}
   m_AnchorMax: {x: 0.67922795, y: 0.246732}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -9046,7 +9059,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cee2419dc95bc942b15cc360bcc9551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.1
   fullText: '-... so my roots can spread and corrupt more lands. '
   passText: {fileID: 40690106}
 --- !u!1 &1962108723
