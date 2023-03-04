@@ -128,7 +128,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   collider: {fileID: 3767378194823884020}
+  targetTansform: {fileID: 0}
+  walkTimer: 20
   escapePercent: 0
+  animator: {fileID: 8386016775538013332}
   inCorruption: 0
 --- !u!135 &3767378194823884021
 SphereCollider:
@@ -254,6 +257,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a9270e81fdd4874a91f7acb2ea9e373, type: 3}
+--- !u!95 &8386016775538013332 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95389484841286514, guid: 4a9270e81fdd4874a91f7acb2ea9e373, type: 3}
+  m_PrefabInstance: {fileID: 8445368503982968806}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8447727416974841312 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4401049854040582, guid: 4a9270e81fdd4874a91f7acb2ea9e373, type: 3}

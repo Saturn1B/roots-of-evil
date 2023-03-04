@@ -46,17 +46,15 @@ public class Altar : MonoBehaviour
         blood01.Play();
         blood02.Play();
 
-        int r = Random.Range(0, corruptionZones.Count);
+        corruptionZones[0].transform.position = 
+            new Vector3(corruptionZones[0].transform.position.x, -2, corruptionZones[0].transform.position.z);
 
-        corruptionZones[r].transform.position = 
-            new Vector3(corruptionZones[r].transform.position.x, -2, corruptionZones[r].transform.position.z);
+        corruptionZones[0].SetActive(true);
 
-        corruptionZones[r].SetActive(true);
+        corruptionZones[0].transform.DOMoveY(0f, 3f);
 
-        corruptionZones[r].transform.DOMoveY(0f, 3f);
-
-        corruptionZonesActive.Add(corruptionZones[r]);
-        corruptionZones.Remove(corruptionZones[r]);
+        corruptionZonesActive.Add(corruptionZones[0]);
+        corruptionZones.Remove(corruptionZones[0]);
 
         sacrificeCount++;
 

@@ -119,6 +119,7 @@ public class PlayerMovement : MonoBehaviour
             animalInRange.transform.eulerAngles = capturedPoints.eulerAngles;
 
             walkState = WalkState.CAPTURE;
+            animator.SetBool("isWalking", false);
             animator.SetBool("isRunning", false);
             animator.SetBool("isCapturing", true);
 
@@ -142,6 +143,8 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator SacrificePath()
     {
+        Debug.LogWarning("sacrifice animal");
+
         SoundManager.Instance.Play(sacrifice);
 
         sacrificeText.SetActive(false);
